@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Fahrzeugbau — Zwischen Technik und Symbolik</title>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=Inter:wght@300;400;600&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --paper: #e9ddc0;
+  --ink: #1a1a1a;
+  --red: #6a0d0d;
+  --gold: #a7863a;
+  --muted: #4b4337;
+
+  --edge-dark: rgba(0,0,0,0.35);
+  --dust: rgba(90,80,65,0.15);
+  --grain: rgba(110,95,75,0.08);
+}
+
+*{box-sizing:border-box; margin:0; padding:0}
+
+body{
+  font-family: "Inter", sans-serif;
+  background: var(--paper);
+  padding: 32px;
+  line-height: 1.75;
+
+  background-image:
+    url('https://www.transparenttextures.com/patterns/aged-paper.png'),
+    url('https://www.transparenttextures.com/patterns/paper-fibers.png'),
+    radial-gradient(ellipse at center, var(--grain), transparent 60%);
+  background-blend-mode: multiply;
+
+  position:relative;
+}
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at center, transparent 60%, rgba(0,0,0,0.45) 100%),
+    radial-gradient(circle at top left, transparent 40%, rgba(0,0,0,0.28) 95%),
+    radial-gradient(circle at bottom right, transparent 40%, rgba(0,0,0,0.28) 95%);
+  mix-blend-mode:multiply;
+  z-index:0;
+}
+
+main.wrapper{
+  width:100%;
+  max-width:1100px;
+  position:relative;
+  z-index:1;
+}
+
+/* HEADER */
+header{
+  text-align:center;
+  padding:28px 20px;
+  margin-bottom:25px;
+  position:relative;
+}
+
+header h1{
+  font-family:"UnifrakturCook";
+  font-size:clamp(36px,6vw,64px);
+  color:var(--red);
+  text-shadow:0 2px 2px rgba(0,0,0,0.25);
+  filter:drop-shadow(0 1px 1px rgba(0,0,0,0.2));
+}
+
+header p.lead{
+  margin-top:8px;
+  font-family:"Courier Prime", monospace;
+  color:#5b5244;
+  opacity:0.9;
+}
+
+header::after{
+  content:"STAATLICH GEPRÜFT • VEB FAHRZEUGBAU";
+  position:absolute;
+  right:20px;
+  top:12px;
+  font-family:"Courier Prime", monospace;
+  font-size:18px;
+  color:rgba(140,25,25,0.28);
+  border:2px solid rgba(140,25,25,0.25);
+  padding:4px 10px;
+  transform:rotate(-10deg);
+  border-radius:4px;
+  opacity:0.85;
+  filter:blur(0.6px);
+}
+
+/* CONTENT LAYOUT */
+.content{
+  display:grid;
+  grid-template-columns: 1fr;
+  gap:24px;
+}
+@media(min-width:960px){
+  .content{
+    grid-template-columns: 1fr 340px;
+  }
+}
+
+/* CARDS */
+.card, .sidebar{
+  background: linear-gradient(180deg, #fbf6e9, #f2ead8);
+  border-radius:10px;
+  padding:24px;
+  border:1px solid rgba(0,0,0,0.22);
+  box-shadow:
+    inset 0 0 18px rgba(0,0,0,0.18),
+    0 6px 20px rgba(0,0,0,0.20);
+  position:relative;
+}
+.card::after, .sidebar::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:
+    url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
+  opacity:0.18;
+  pointer-events:none;
+}
+
+/* TITLES */
+h2.section-title{
+  font-family:"Courier Prime", monospace;
+  font-weight:700;
+  color:var(--red);
+  letter-spacing:1.2px;
+  font-size:18px;
+  border-bottom:3px solid rgba(90,20,20,0.3);
+  padding-bottom:3px;
+  margin-bottom:14px;
+}
+
+/* TEXT */
+p, li{
+  color:var(--ink);
+  font-size:16px;
+  margin-bottom:14px;
+  opacity:0.90;
+}
+
+/* GLOBAL IMAGE SIZE */
+img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  border-radius:10px;
+  border:4px solid rgba(60,40,30,0.25);
+  box-shadow:
+    inset 0 0 8px rgba(0,0,0,0.25),
+    0 4px 14px rgba(0,0,0,0.35);
+
+  filter:
+    sepia(65%)
+    contrast(90%)
+    brightness(94%)
+    saturate(65%);
+  transition:all .25s ease;
+
+  cursor:zoom-in;
+}
+
+img:hover{
+  transform:scale(1.03);
+}
+
+/* IMAGE ROW */
+.image-row{
+  display:flex;
+  gap:18px;
+  flex-wrap:wrap;
+}
+
+.image-container{
+  flex:1 1 240px;
+  text-align:center;
+}
+
+/* GALLERY */
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+/* NOTICE */
+.notice{
+  background: linear-gradient(90deg, rgba(122,14,14,0.06), rgba(181,139,58,0.03));
+  border-left:4px solid var(--red);
+  padding:14px;
+  border-radius:6px;
+  margin-bottom:18px;
+  font-size:14px;
+}
+
+/* TABS */
+.tabs{
+  display:flex;
+  gap:10px;
+  margin-bottom:18px;
+  flex-wrap:wrap;
+}
+
+.tab{
+  padding:10px 18px;
+  font-family:"Courier Prime", monospace;
+  font-weight:700;
+  background:linear-gradient(180deg,#f2ecde,#d8ccba);
+  border:1px solid rgba(0,0,0,0.45);
+  box-shadow:
+    inset 0 0 6px rgba(0,0,0,0.4),
+    0 3px 6px rgba(0,0,0,0.3);
+  letter-spacing:0.6px;
+  cursor:pointer;
+  border-radius:4px;
+  filter:saturate(75%) brightness(95%);
+}
+
+.tab:hover{
+  background:linear-gradient(180deg,#ebe3d1,#d2c4af);
+  transform:translateY(-2px);
+}
+
+.tab.active{
+  background:var(--red);
+  color:#fff;
+  border-color:var(--red);
+  box-shadow:
+    inset 0 0 10px rgba(0,0,0,0.45),
+    0 3px 8px rgba(0,0,0,0.4);
+}
+
+.tab-content{ display:none; }
+.tab-content.active{ display:block; }
+
+/* SIDEBAR */
+.sidebar h4, .sidebar h2{
+  font-family:"Courier Prime", monospace;
+}
+
+.sidebar ul{
+  list-style:none;
+  padding-left:0;
+  color:var(--muted);
+  font-size:14px;
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  font-family:"Courier Prime", monospace;
+  color:#4e4739;
+  margin-top:20px;
+  padding-top:18px;
+  border-top:1px dashed rgba(0,0,0,0.25);
+  opacity:0.85;
+}
+</style>
+</head>
+
+<body>
+<main class="wrapper">
+
+  <header>
+    <h1>Fahrzeugbau</h1>
+    <p class="lead">Zwischen Technikgeschichte und symbolischer Gestaltung — Erstellt von Jason & Lara</p>
+  </header>
+
+  <div class="content">
+
+    <!-- MAIN CONTENT -->
+    <section class="card">
+      <h2 class="section-title">Fahrzeugbau in der DDR</h2>
+
+      <div class="tabs">
+        <div class="tab active" data-tab="allgemein">Allgemein</div>
+        <div class="tab" data-tab="videos">Videos</div>
+        <div class="tab" data-tab="audio">Audio</div>
+      </div>
+
+      <div id="allgemein" class="tab-content active">
+
+        <div class="notice">
+          <strong>Wichtig:</strong> Einige Themen sollten mit Quellenangaben betrachtet werden.
+        </div>
+
+        <h2 class="section-title">Die Fahrzeuge in der DDR</h2>
+        <p>Die DDR verfügte über zentrale Automobilwerke in Eisenach, Zwickau und Dresden. Bekannte Modelle waren Trabant, Wartburg und Barkas. Fahrzeuge hatten oft lange Lieferzeiten, sodass Warteschlangen üblich waren. Trotz einfacher Technik erlangten sie Kultstatus.</p>
+
+        <h2 class="section-title">Technische Daten</h2>
+        <ul>
+          <li>Trabant: 2-Zylinder-Zweitaktmotor, 26 PS, Höchstgeschwindigkeit 100 km/h, Karosserie aus Duroplast.</li>
+          <li>Wartburg: 3-Zylinder-Zweitaktmotor, 50 PS, Höchstgeschwindigkeit 135 km/h, Mittelklassewagen.</li>
+          <li>Barkas B1000: Lieferwagen, 4-Zylinder, 38 PS, Nutzfahrzeug der DDR.</li>
+        </ul>
+
+        <h2 class="section-title">Kulturhistorische Infos</h2>
+        <p>Fahrzeuge in der DDR hatten Symbolwert: der Besitz eines Autos bedeutete Status. Lieferzeiten konnten 12–18 Jahre betragen. Warteschlangen waren alltäglich, und Fahrzeugmodelle wurden zu Statussymbolen. Straßenbilder waren geprägt von kleinen PKW wie Trabant und Wartburg sowie importierten Lada oder Skoda.</p>
+
+        <h2 class="section-title">Beliebteste Autos & Bilder</h2>
+        <div class="image-row">
+
+          <div class="image-container">
+            <img src="https://i.postimg.cc/Y0623YQ7/9c337090-ce59-41fc-bade-0b6085b9dcd9.jpg" alt="Trabant Detail">
+            <p>Rahmenaufbau mit Karosserie aus Duroplast, Einzelradaufhängung vorn, Schräglenkerachse hinten, luftgekühlter Motor.</p>
+          </div>
+
+          <div class="image-container">
+            <img src="https://i.postimg.cc/Hk45x8Nf/Trabant-601.jpg" alt="Trabant 601">
+            <p>Trabant 601: 18–26 PS, kleine Karosserie, weit verbreitet in der DDR.</p>
+          </div>
+
+          <div class="image-container">
+            <img src="https://i.postimg.cc/fbRCmQ6W/Fabrik.jpg" alt="Fabrik">
+            <p>Produktionshalle: Serienfertigung von Trabant und Wartburg unter sozialistischem Wettbewerb.</p>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div id="videos" class="tab-content">
+        <h2 class="section-title">Historische Videos</h2>
+        <p>Werbefilme aus der DDR für Trabant, Wartburg und Barkas B1000.</p>
+        <video controls><source src="ssvid.net--DDR-Werbung-Trabant-601_360p.mp4" type="video/mp4"></video>
+        <video controls><source src="ssvid.net--DDR-Werbung-Wartburg-1000_360p.mp4" type="video/mp4"></video>
+        <video controls><source src="ssvid.net--Elektro-Barkas-B-1000-Reklamefilm-der-DDR.mp4" type="video/mp4"></video>
+      </div>
+
+      <div id="audio" class="tab-content">
+        <h2 class="section-title">Musikalische Begleitung</h2>
+        <p>Typische Klangkulisse:Radiowerbung aus der DDR.</p>
+	<p>Sie fährt zurück</p>
+        <audio controls><source src="Sie fährt zurück.mp3" type="audio/mp3"></audio>
+	<p>Am Fenster (Radio Edit)</p>
+	<audio controls><source src="Am Fenster (Radio Edit).mp3" type="audio/mp3"></audio>
+      </div>
+
+    </section>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <h2 class="section-title">Kurzinfo & Quellen</h2>
+
+      <p><strong>Name:</strong> Fusion DDR-Ästhetik + Ornamentik</p>
+      <p><strong>Gestaltung:</strong> Papiertextur, Rot/Gold, Monospace</p>
+
+      <div class="gallery" style="margin-top:14px;">
+        <img src="https://i.postimg.cc/fycKmY9M/403214440-1684386393-v16-9-1600.webp" alt="Werkstatt klein">
+        <img src="https://i.postimg.cc/tRY22VhG/trabant-ddr-strassenverkehr.jpg" alt="Trabi klein">
+      </div>
+
+      <h4 style="margin-top:14px; font-family:'Courier Prime', monospace; color:var(--red); margin-bottom:6px;">Quellen</h4>
+      <ul>
+        <li>VEB Automobilwerke Eisenach, Zwickau, Dresden – historische Produktionsdaten</li>
+        <li>DDR-Werbefilme – YouTube-Kanäle: „DDR-Werbefilme“, DDR-Archiv</li>
+        <li>DDR-Musik & Klangkulisse – MDR, RBB Archive</li>
+        <li>Bildquellen: Postimages & historische Fotos der DDR-Automobilproduktion</li>
+        <li>Kulturhistorische Infos: Zeitzeugenberichte, Archive & Literatur zur DDR</li>
+      </ul>
+    </aside>
+
+  </div>
+
+  <footer>
+    © 2025 — Erstellt von Jason & Lara
+  </footer>
+
+</main>
+
+<script>
+/* ============================================================
+   GLOBALER BILDER-ZOOM – Ganzes Bild sichtbar
+   ============================================================ */
+document.querySelectorAll('img').forEach(img => {
+  img.addEventListener('click', () => {
+    if(!img.src) return;
+    const overlay = document.createElement('div');
+    overlay.className = 'overlay-img';
+    overlay.style = `
+      position:fixed; inset:0; background:rgba(12,10,8,0.94);
+      display:flex; justify-content:center; align-items:center;
+      z-index:9999; cursor:zoom-out;
+      overflow:auto; padding:10px;
+    `;
+    const big = document.createElement('img');
+    big.src = img.src;
+    big.alt = img.alt || '';
+    big.style = `
+      max-width:98%; max-height:98%;
+      object-fit:contain; border-radius:10px;
+      box-shadow:0 20px 60px rgba(0,0,0,0.7);
+    `;
+    overlay.appendChild(big);
+    overlay.addEventListener('click',()=>overlay.remove());
+    document.body.appendChild(overlay);
+  });
+});
+
+document.addEventListener('keydown', (e)=>{
+  if(e.key==='Escape'){
+    document.querySelectorAll('.overlay-img').forEach(o=>o.remove());
+  }
+});
+
+/* ============================================================
+   TABS
+   ============================================================ */
+const tabs=document.querySelectorAll('.tab');
+const contents=document.querySelectorAll('.tab-content');
+
+tabs.forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    tabs.forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    contents.forEach(c=>c.classList.remove('active'));
+    document.getElementById(tab.dataset.tab).classList.add('active');
+  });
+});
+</script>
+
+</body>
+</html>
